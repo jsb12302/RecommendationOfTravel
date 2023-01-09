@@ -10,4 +10,9 @@ public class MainController {
     public String mainPage(){
         return "index";
     }
+
+    @GetMapping("/aviationByCountry")
+    public String aviationPage(){
+        return "aviation/aviation";
+    }
 }
