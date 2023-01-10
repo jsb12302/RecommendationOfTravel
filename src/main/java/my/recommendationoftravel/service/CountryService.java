@@ -30,7 +30,8 @@ public class CountryService {
                 .build();
 
         HttpResponse<String> httpResponse = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(httpResponse.body());
+
+//        System.out.println(httpResponse.body());
 
         JSONObject jsonObject = new JSONObject(httpResponse.body());
         JSONObject response = jsonObject.getJSONObject("response");
@@ -41,11 +42,25 @@ public class CountryService {
 
         for(int i=0; i< items.length(); i++){
             JSONObject item = items.getJSONObject(i);
-            Country country = objectMapper.readValue(item.toString(), Country.class);
-            countryList.add(country);
+            String region = item.getString("region");
+            String country = item.getString("country");
+            int arrFlight = Integer.parseInt(makeInt(item.getString("arrFlight")));
+            int depFlight = Integer.parseInt(makeInt(item.getString("depFlight")));
+
+            Country countries = Country.builder()
+                    .region(region)
+                    .country(country)
+                    .arrFlight(arrFlight)
+                    .depFlight(depFlight).build();
+
+            countryList.add(countries);
         }
 
         return countryList;
+    }
+
+    private static String makeInt(String input){
+        return input.replace(",", "");
     }
 
     private static StringBuilder makeUrl(String fromMonth, String toMonth) throws UnsupportedEncodingException {
