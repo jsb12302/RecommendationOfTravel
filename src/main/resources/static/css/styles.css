@@ -76,6 +76,20 @@
   }
 }
 
+/*
+  커스텀
+
+*/
+
+.jb-red{
+  color: red;
+}
+
+/*
+  커스텀
+
+*/
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);

@@ -9,18 +9,20 @@
 
         <main>
             <div class="container">
-                <form th:action="@{/getAviation}" th:method="post">
+                <form th:action="@{/getAviation}" th:method="post" th:object="${requestDateDTO}">
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-6">
                             <div class="form-group">
-                                조회 시작 기간<input type="text" class="form-control" name="fromMonth"
+                                조회 시작 기간<input type="text" class="form-control" th:field="*{fromMonth}"
                                                placeholder="ex) 202205"/>
+                                <p th:if="${#fields.hasErrors('fromMonth')}" th:errors="*{fromMonth}" class="jb-red"></p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                조회 기간 까지<input type="text" class="form-control" name="toMonth"
+                                조회 기간 까지<input type="text" class="form-control" th:field="*{toMonth}"
                                                placeholder="ex) 202206"/>
+                                <p th:if="${#fields.hasErrors('toMonth')}" th:errors="*{toMonth}" class="jb-red"></p>
                             </div>
                         </div>
                         <br><br><br>
