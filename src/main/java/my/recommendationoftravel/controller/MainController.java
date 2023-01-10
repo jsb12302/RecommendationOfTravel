@@ -13,6 +13,6 @@ public class MainController {
 
     @GetMapping("/aviationByCountry")
     public String aviationPage(){
-        return "/aviation/aviation";
+        return "aviation/aviation";
     }
 }
