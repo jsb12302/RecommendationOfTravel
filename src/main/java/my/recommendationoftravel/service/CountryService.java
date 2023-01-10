@@ -2,6 +2,7 @@ package my.recommendationoftravel.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import my.recommendationoftravel.domain.Country;
+import my.recommendationoftravel.domain.RequestDateDTO;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,8 @@ public class CountryService {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public List<Country> requestCountryApi(String fromMonth, String toMonth) throws IOException, InterruptedException {
-        StringBuilder urlBuilder = makeUrl(fromMonth, toMonth);
+    public List<Country> requestCountryApi(RequestDateDTO requestDateDTO) throws IOException, InterruptedException {
+        StringBuilder urlBuilder = makeUrl(requestDateDTO.getFromMonth(), requestDateDTO.getToMonth());
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(urlBuilder.toString()))
