@@ -1,19 +1,16 @@
 package my.recommendationoftravel.service.page;
 
 import lombok.Data;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Data
-public class PageRequestDTO<DTO, EN> {
+public class PageResultDTO{
 
-    private List<DTO> dtoList;
     private List<Integer> pageList;
-
     private int totalPage;
     private int page;
     private int size;
@@ -22,10 +19,10 @@ public class PageRequestDTO<DTO, EN> {
     private boolean prev;
     private boolean next;
 
-    public PageRequestDTO(Page<EN> result, Function<EN, DTO>fn) {
-        dtoList = result.stream().map(fn).collect(Collectors.toList());
-        totalPage = result.getTotalPages();
-        makePageList(result.getPageable());
+    public PageResultDTO(Pageable pageable, int totalPage) {
+        this.totalPage = (int)(Math.ceil(totalPage/10.0));
+        makePageList(pageable);
+
     }
 
     private void makePageList(Pageable pageable) {
@@ -36,6 +33,7 @@ public class PageRequestDTO<DTO, EN> {
         start = tempEnd - 9;
         prev = start > 1;
         end = totalPage > tempEnd ? tempEnd : totalPage;
-        next = totalPage > tempEnd
+        next = totalPage > tempEnd;
+        pageList = IntStream.rangeClosed(start,end).boxed().collect(Collectors.toList());
     }
 }
