@@ -1,10 +1,12 @@
 package my.recommendationoftravel.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import my.recommendationoftravel.domain.Country;
-import my.recommendationoftravel.domain.RequestDateDTO;
+import my.recommendationoftravel.domain.RequestAviationDTO;
+import my.recommendationoftravel.service.page.PageResultDTO;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,16 +16,14 @@ import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CountryService {
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-
-    public List<Country> requestCountryApi(RequestDateDTO requestDateDTO) throws IOException, InterruptedException {
-        StringBuilder urlBuilder = makeUrl(requestDateDTO.getFromMonth(), requestDateDTO.getToMonth());
+    static int totalPage = 0;
+    public List<Country> requestCountryApi(RequestAviationDTO requestAviationDTO) throws IOException, InterruptedException {
+        StringBuilder urlBuilder = makeUrl(requestAviationDTO.getFromMonth(), requestAviationDTO.getToMonth());
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(urlBuilder.toString()))
@@ -56,13 +56,44 @@ public class CountryService {
 
             countryList.add(countries);
         }
+        totalPage = countryList.size();
+        List<Country> countries = returnOrder(countryList, requestAviationDTO.getOrder());
+        return getPaging(countries, requestAviationDTO.getPage());
+    }
 
-        return countryList;
+    public List<Country> getPaging(List<Country> countries, int pageNum){
+        Pageable pageable = PageRequest.of(pageNum - 1,10);
+        int pageSize = 0;
+        int currentPage = pageable.getPageNumber();
+        if(pageable.getPageNumber()==totalPage / pageable.getPageSize()){
+            pageSize = totalPage % pageable.getPageSize();
+        }
+        else{
+            pageSize = pageable.getPageSize();
+        }
+        int startItem = currentPage * 10;
+        return countries.subList(startItem, startItem + pageSize);
+    }
+
+    public List<Country> returnOrder(List<Country> countries, String order){
+        Collections.sort(countries, new Comparator<Country>() {
+            @Override
+            public int compare(Country o1, Country o2) {
+                if(order.equals("ASC")){
+                    return o1.getArrFlight() - o2.getArrFlight();
+                }
+                else{
+                    return o2.getArrFlight() - o1.getArrFlight();
+                }
+            }
+        });
+        return countries;
     }
 
     private static String makeInt(String input){
         return input.replace(",", "");
     }
+
 
     private static StringBuilder makeUrl(String fromMonth, String toMonth) throws UnsupportedEncodingException {
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551177/AviationStatsByCountry/getTotalNumberOfFlight"); /*URL*/
@@ -75,4 +106,8 @@ public class CountryService {
         return urlBuilder;
     }
 
+    public PageResultDTO responsePage(RequestAviationDTO requestAviationDTO) {
+        Pageable pageable = PageRequest.of(requestAviationDTO.getPage() - 1,10);
+        return new PageResultDTO(pageable, totalPage);
+    }
 }

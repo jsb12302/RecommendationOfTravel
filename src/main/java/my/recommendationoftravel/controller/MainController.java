@@ -1,7 +1,7 @@
 package my.recommendationoftravel.controller;
 
 
-import my.recommendationoftravel.domain.RequestDateDTO;
+import my.recommendationoftravel.domain.RequestAviationDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,7 +13,8 @@ public class MainController {
     }
 
     @GetMapping("/aviationByCountry")
-    public String aviationPage(RequestDateDTO requestDateDTO){
+    public String aviationPage(RequestAviationDTO requestAviationDTO){
         return "aviation/aviation";
     }
+
 }

@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @ToString
 @Getter
 @Setter
-public class RequestDateDTO {
+public class RequestAviationDTO {
 
     @NotBlank(message = "년월 입력은 필수 입니다.")
     @Size(min = 6, message = "올바르지 않은 입력입니다.")
@@ -22,5 +22,8 @@ public class RequestDateDTO {
     @Size(min = 6, message = "올바르지 않은 입력입니다.")
     @Size(max = 6, message = "올바르지 않은 입력입니다.")
     String toMonth;
+
+    String order;
+    int page;
 
 }
