@@ -19,7 +19,7 @@ import java.net.http.HttpResponse;
 import java.util.*;
 
 @Service
-public class CountryService {
+public class AviationService {
 
     static int totalPage = 0;
     public List<Country> requestCountryApi(RequestAviationDTO requestAviationDTO) throws IOException, InterruptedException {
