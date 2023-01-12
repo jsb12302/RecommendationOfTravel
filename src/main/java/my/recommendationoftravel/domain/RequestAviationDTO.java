@@ -24,6 +24,7 @@ public class RequestAviationDTO {
     String toMonth;
 
     String order;
+    String keyword;
     int page;
 
 }
