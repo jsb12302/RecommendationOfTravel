@@ -2,8 +2,7 @@ package my.recommendationoftravel.controller;
 
 import my.recommendationoftravel.domain.Country;
 import my.recommendationoftravel.domain.RequestAviationDTO;
-import my.recommendationoftravel.service.CountryService;
-import my.recommendationoftravel.service.page.PageResultDTO;
+import my.recommendationoftravel.service.AviationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +16,11 @@ import java.util.List;
 @Controller
 public class aviationController {
 
-    private CountryService countryService;
+    private AviationService aviationService;
 
     @Autowired
-    public aviationController(CountryService countryService) {
-        this.countryService = countryService;
+    public aviationController(AviationService aviationService) {
+        this.aviationService = aviationService;
     }
 
     @GetMapping("/getAviation")
@@ -30,10 +29,10 @@ public class aviationController {
         if(bindingResult.hasErrors()){
             return "aviation/aviation";
         }
-        List<Country> countries = countryService.requestCountryApi(requestAviationDTO);
+        List<Country> countries = aviationService.requestCountryApi(requestAviationDTO);
         model.addAttribute("countryList", countries);
         model.addAttribute("requestDateDTO", requestAviationDTO);
-        model.addAttribute("pageResponseDTO",countryService.responsePage(requestAviationDTO));
+        model.addAttribute("pageResponseDTO", aviationService.responsePage(requestAviationDTO));
         return "aviation/countryList";
     }
 

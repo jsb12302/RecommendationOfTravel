@@ -16,14 +16,28 @@
                         [[${requestAviationDTO.toMonth}]]
                     </h2>
                 </div>
-                <button th:onclick="|location.href='@{/getAviation(fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},page=${pageResponseDTO.page},order=${'DESC'})}'|" class="btn btn-outline-secondary btn-search">내림차순</button>
-                <button th:onclick="|location.href='@{/getAviation(fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},page=${pageResponseDTO.page},order=${'ASC'})}'|" class="btn btn-outline-secondary btn-search">오름차순</button>
+                <button th:onclick="|location.href='@{/getAviation(keyword=${requestAviationDTO.keyword},fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},page=${pageResponseDTO.page},order=${'DESC'})}'|" class="btn btn-outline-secondary btn-search">내림차순</button>
+                <button th:onclick="|location.href='@{/getAviation(keyword=${requestAviationDTO.keyword},fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},page=${pageResponseDTO.page},order=${'ASC'})}'|" class="btn btn-outline-secondary btn-search">오름차순</button>
+
+                <form th:action="@{/getAviation}" method="get" id="searchForm">
+                    <div class="input-group">
+                        <input class="form-control" name="keyword" >
+                        <input type="hidden" name="fromMonth" th:value="${requestAviationDTO.fromMonth}">
+                        <input type="hidden" name="toMonth" th:value="${requestAviationDTO.toMonth}">
+                        <input type="hidden" name="page" th:value="${pageResponseDTO.page}">
+                        <input type="hidden" name="order" th:value="${requestAviationDTO.order}">
+                        <div class="input-group-append" id="button-addon4">
+                            <button class="btn btn-outline-secondary btn-search" type="submit">search</button>
+                        </div>
+                    </div>
+                </form>
+
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>지역</th>
                         <th>나라</th>
-                        <th>출발</th>
+                        <th>출항 횟수</th>
                     </tr>
                     </thead>
                     <tbody>

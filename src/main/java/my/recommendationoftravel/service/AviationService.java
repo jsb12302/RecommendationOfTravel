@@ -1,5 +1,6 @@
 package my.recommendationoftravel.service;
 
+import lombok.extern.slf4j.Slf4j;
 import my.recommendationoftravel.domain.Country;
 import my.recommendationoftravel.domain.RequestAviationDTO;
 import my.recommendationoftravel.service.page.PageResultDTO;
@@ -19,7 +20,8 @@ import java.net.http.HttpResponse;
 import java.util.*;
 
 @Service
-public class CountryService {
+@Slf4j
+public class AviationService {
 
     static int totalPage = 0;
     public List<Country> requestCountryApi(RequestAviationDTO requestAviationDTO) throws IOException, InterruptedException {
@@ -54,7 +56,18 @@ public class CountryService {
                     .arrFlight(arrFlight)
                     .depFlight(depFlight).build();
 
-            countryList.add(countries);
+            if(!(requestAviationDTO.getKeyword().isBlank())){
+                if(countries.getCountry().equals(requestAviationDTO.getKeyword())){
+                    countryList.add(countries);
+                }
+                if(countries.getRegion().equals(requestAviationDTO.getKeyword())){
+                    countryList.add(countries);
+                }
+            }
+            else{
+                countryList.add(countries);
+            }
+
         }
         totalPage = countryList.size();
         List<Country> countries = returnOrder(countryList, requestAviationDTO.getOrder());
