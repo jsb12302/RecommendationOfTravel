@@ -2,8 +2,10 @@ package my.recommendationoftravel.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import my.recommendationoftravel.domain.Country;
+import my.recommendationoftravel.domain.Parking;
 import my.recommendationoftravel.domain.RequestAviationDTO;
 import my.recommendationoftravel.service.AviationService;
+import my.recommendationoftravel.service.ParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +18,15 @@ import java.util.List;
 
 @Controller
 @Slf4j
-public class I {
+public class IncheonController {
 
     private final AviationService aviationService;
+    private final ParkingService parkingService;
 
     @Autowired
-    public I(AviationService aviationService) {
+    public IncheonController(AviationService aviationService, ParkingService parkingService) {
         this.aviationService = aviationService;
+        this.parkingService = parkingService;
     }
 
     @GetMapping("/getAviation")
@@ -37,6 +41,14 @@ public class I {
         model.addAttribute("requestDateDTO", requestAviationDTO);
         model.addAttribute("pageResponseDTO", aviationService.responsePage(requestAviationDTO));
         return "aviation/countryList";
+    }
+
+    @GetMapping("/getParking")
+    public String ParkingInfoPage(Model model) throws IOException, InterruptedException {
+        List<Parking> parkingList = parkingService.requestParkingApi();
+        model.addAttribute("parkingList",parkingList);
+        model.addAttribute("standardTime",parkingService.getParkingTime());
+        return "parking/parkingList";
     }
 
 }
