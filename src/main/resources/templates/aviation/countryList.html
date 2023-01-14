@@ -51,10 +51,10 @@
 
                 <ul class="pagination  justify-content-center align-items-center">
                     <li class="page-item" th:if="${pageResponseDTO.prev}">
-                        <a class="page-link" th:href="@{/getAviation(fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},order=${requestAviationDTO.order},page=${pageResponseDTO.end+1})}" tabindex="-1">Previous</a>
+                        <a class="page-link" th:href="@{/getAviation(keyword=${requestAviationDTO.keyword},fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},order=${requestAviationDTO.order},page=${pageResponseDTO.end+1})}" tabindex="-1">Previous</a>
                     </li>
                     <li th:class="'page-item ' + ${pageResponseDTO.page == page?'active':''}"th:each="page : ${pageResponseDTO.pageList}">
-                        <a class="page-link" th:href="@{/getAviation(fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},page=${page},order=${requestAviationDTO.order})}">
+                        <a class="page-link" th:href="@{/getAviation(keyword=${requestAviationDTO.keyword},fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},page=${page},order=${requestAviationDTO.order})}">
                             [[${page}]]
                         </a>
                     </li>
