@@ -16,12 +16,12 @@ import java.util.List;
 
 @Controller
 @Slf4j
-public class aviationController {
+public class I {
 
-    private AviationService aviationService;
+    private final AviationService aviationService;
 
     @Autowired
-    public aviationController(AviationService aviationService) {
+    public I(AviationService aviationService) {
         this.aviationService = aviationService;
     }
 
