@@ -1,5 +1,6 @@
 package my.recommendationoftravel.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import my.recommendationoftravel.domain.Country;
 import my.recommendationoftravel.domain.RequestAviationDTO;
 import my.recommendationoftravel.service.AviationService;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class aviationController {
 
     private AviationService aviationService;
@@ -26,6 +28,7 @@ public class aviationController {
     @GetMapping("/getAviation")
     public String countryListPage(@Valid RequestAviationDTO requestAviationDTO, BindingResult bindingResult, Model model)
             throws IOException, InterruptedException {
+        log.info("Aviation API 호출");
         if(bindingResult.hasErrors()){
             return "aviation/aviation";
         }
