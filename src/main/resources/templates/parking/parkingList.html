@@ -12,7 +12,7 @@
 
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">
-                        기준 시간 : [[${standardTime}]]
+                        기준 시간 : [[${standardTime}]] <button th:onclick="|location.href='@{/getParking}'|" class="btn btn-outline-secondary btn-search">새로고침</button>
                     </h2>
                 </div>
 
@@ -23,6 +23,7 @@
                         <th>전체 전체 대수</th>
                         <th>현재 주차 대수</th>
                         <th>잔여 주차 대수</th>
+                        <th>혼잡도</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,6 +32,9 @@
                         <td th:text="${parking.parkingArea}"></td>
                         <td th:text="${parking.parking}"></td>
                         <td th:text="${parking.parkingArea} - ${parking.parking}"></td>
+                        <td>
+                            <meter th:value="${ (parking.parking * 100) / parking.parkingArea}" max="100" min="0" low="50" high="75" optimum="0"></meter>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
