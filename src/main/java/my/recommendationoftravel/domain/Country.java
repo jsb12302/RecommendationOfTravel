@@ -1,33 +1,18 @@
 package my.recommendationoftravel.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Builder
+@Getter
 public class Country {
 
     private String region;
     private String country;
     private int arrFlight;
     private int depFlight;
-    private int flights;
 
-    public String getRegion() {
-        return region;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public int getArrFlight() {
-        return arrFlight;
-    }
-
-    public int getDepFlight() {
-        return depFlight;
-    }
-
-    public int getFlights() {
-        return flights;
-    }
 }

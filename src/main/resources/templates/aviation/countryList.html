@@ -1,28 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<table>
-    <thead>
-    <tr>
-        <th>지역</th>
-        <th>나라</th>
-        <th>출발</th>
-        <th>도착</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="country : ${countryList}">
-        <td th:text="${country.region}"></td>
-        <td th:text="${country.country}"></td>
-        <td th:text="${country.arrFlight}"></td>
-        <td th:text="${country.depFlight}"></td>
-    </tr>
-    </tbody>
-</table>
+<html lang="en xmlns:th=http://www.thymeleaf.org">
+<th:block th:replace="~{layout:: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <br>
+        <br>
+        <br>
+        <br>
 
-</body>
+        <main>
+            <div class="container">
+
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">
+                        [[${requestAviationDTO.fromMonth}]] ~
+                        [[${requestAviationDTO.toMonth}]]
+                    </h2>
+                </div>
+                <button th:onclick="|location.href='@{/getAviation(keyword=${requestAviationDTO.keyword},fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},page=${pageResponseDTO.page},order=${'DESC'})}'|" class="btn btn-outline-secondary btn-search">내림차순</button>
+                <button th:onclick="|location.href='@{/getAviation(keyword=${requestAviationDTO.keyword},fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},page=${pageResponseDTO.page},order=${'ASC'})}'|" class="btn btn-outline-secondary btn-search">오름차순</button>
+
+                <form th:action="@{/getAviation}" method="get" id="searchForm">
+                    <div class="input-group">
+                        <input class="form-control" name="keyword" >
+                        <input type="hidden" name="fromMonth" th:value="${requestAviationDTO.fromMonth}">
+                        <input type="hidden" name="toMonth" th:value="${requestAviationDTO.toMonth}">
+                        <input type="hidden" name="page" th:value="${pageResponseDTO.page}">
+                        <input type="hidden" name="order" th:value="${requestAviationDTO.order}">
+                        <div class="input-group-append" id="button-addon4">
+                            <button class="btn btn-outline-secondary btn-search" type="submit">search</button>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>지역</th>
+                        <th>나라</th>
+                        <th>출항 횟수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="country : ${countryList}">
+                        <td th:text="${country.region}"></td>
+                        <td th:text="${country.country}"></td>
+                        <td th:text="${country.arrFlight}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <ul class="pagination  justify-content-center align-items-center">
+                    <li class="page-item" th:if="${pageResponseDTO.prev}">
+                        <a class="page-link" th:href="@{/getAviation(keyword=${requestAviationDTO.keyword},fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},order=${requestAviationDTO.order},page=${pageResponseDTO.end+1})}" tabindex="-1">Previous</a>
+                    </li>
+                    <li th:class="'page-item ' + ${pageResponseDTO.page == page?'active':''}"th:each="page : ${pageResponseDTO.pageList}">
+                        <a class="page-link" th:href="@{/getAviation(keyword=${requestAviationDTO.keyword},fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},page=${page},order=${requestAviationDTO.order})}">
+                            [[${page}]]
+                        </a>
+                    </li>
+                    <li class="page-item" th:if="${pageResponseDTO.next}">
+                        <a class="page-link" th:href="@{/getAviation(fromMonth=${requestAviationDTO.fromMonth},toMonth=${requestAviationDTO.toMonth},order=${requestAviationDTO.order},page=${pageResponseDTO.end+1})}">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </main>
+
+    </th:block>
+</th:block>
 </html>
+
+
+

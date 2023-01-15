@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en xmlns:th=http://www.thymeleaf.org">
+<th:block th:replace="~{layout:: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <main>
+            <div class="container">
+
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">
+                        기준 시간 : [[${standardTime}]] <button th:onclick="|location.href='@{/getParking}'|" class="btn btn-outline-secondary btn-search">새로고침</button>
+                    </h2>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>주차 구역</th>
+                        <th>전체 전체 대수</th>
+                        <th>현재 주차 대수</th>
+                        <th>잔여 주차 대수</th>
+                        <th>혼잡도</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="parking : ${parkingList}">
+                        <td th:text="${parking.floor}"></td>
+                        <td th:text="${parking.parkingArea}"></td>
+                        <td th:text="${parking.parking}"></td>
+                        <td th:text="${parking.parkingArea} - ${parking.parking}"></td>
+                        <td>
+                            <meter th:value="${ (parking.parking * 100) / parking.parkingArea}" max="100" min="0" low="50" high="75" optimum="0"></meter>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>>
+
+        </main>
+
+    </th:block>
+</th:block>
+</html>
+
+
+
