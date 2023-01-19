@@ -27,5 +27,14 @@ public class MainController {
         return "aviation/aviation";
     }
 
+    @GetMapping("/login")
+    public String loginPage(){
+        return "user/login";
+    }
+
+    @GetMapping("/signup")
+    public String signUpPage(){
+        return "user/signup";
+    }
 
 }

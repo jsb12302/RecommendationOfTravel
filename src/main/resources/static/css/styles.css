@@ -81,12 +81,28 @@
 
 */
 
+.container-loginForm
+{
+  width: 20%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10%;
+}
+
 .jb-red{
   color: red;
 }
 
 .jb-blue{
-  color: #0d6efd;
+  color: #1C62B3;
+}
+
+.btn-primary-blue{
+  color: #fff;
+  background-color: #1C62B3;
+  border-color: #1C62B3;
 }
 
 /*
@@ -3139,8 +3155,8 @@ textarea.form-control-lg {
 
 .btn-info {
   color: #fff;
-  background-color: #0dcaf0;
-  border-color: #0dcaf0;
+  background-color: #1C62B3;
+  border-color: #1C62B3;
 }
 .btn-info:hover {
   color: #fff;
