@@ -2,8 +2,8 @@ package my.recommendationoftravel.service;
 
 import lombok.extern.slf4j.Slf4j;
 import my.recommendationoftravel.domain.Country;
+import my.recommendationoftravel.domain.PageResultDTO;
 import my.recommendationoftravel.domain.RequestAviationDTO;
-import my.recommendationoftravel.service.page.PageResultDTO;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.data.domain.PageRequest;
