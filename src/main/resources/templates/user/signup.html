@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en xmlns:th=http://www.thymeleaf.org">
 
-</body>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Recommendation Of Travel</title>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet"
+          type="text/css"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet"/>
+</head>
+
+<main>
+    <div class="container-loginForm">
+        <form th:action="@{/signup}" th:method="post" th:object="${userDTO}">
+            <!-- ID input -->
+            <div class="form-outline mb-4">
+                <input type="text" th:field="*{userId}" class="form-control"/>
+                <label class="form-label">ID</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input type="password" th:field="*{password}" class="form-control"/>
+                <label class="form-label" >Password</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input type="password" th:field="*{password2}" class="form-control"/>
+                <label class="form-label">Confirm Password</label>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="w-100 btn btn-info btn-block mb-4">Sign up</button>
+        </form>
+    </div>
+</main>
 </html>

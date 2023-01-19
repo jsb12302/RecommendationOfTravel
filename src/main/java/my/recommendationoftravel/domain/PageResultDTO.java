@@ -1,4 +1,4 @@
-package my.recommendationoftravel.service.page;
+package my.recommendationoftravel.service;
 
 import lombok.Data;
 import org.springframework.data.domain.Pageable;
