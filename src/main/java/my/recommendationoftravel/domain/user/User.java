@@ -15,4 +15,10 @@ public class User {
     private String userId;
     private String password;
 
+    public User userDtoToEntity(UserDTO userDTO){
+        User user = new User();
+        user.userId = userDTO.getUserId();
+        user.password = userDTO.getPassword();
+        return user;
+    }
 }
