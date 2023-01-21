@@ -2,10 +2,13 @@ package my.recommendationoftravel.controller;
 
 
 import my.recommendationoftravel.domain.RequestAviationDTO;
+import my.recommendationoftravel.domain.user.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

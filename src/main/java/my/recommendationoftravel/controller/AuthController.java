@@ -4,14 +4,15 @@ import my.recommendationoftravel.domain.user.UserDTO;
 import my.recommendationoftravel.service.UserService;
 import my.recommendationoftravel.util.AlertException;
 import my.recommendationoftravel.util.ErrorMessage;
-import my.recommendationoftravel.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.net.http.HttpRequest;
 
 @Controller
 public class AuthController {
@@ -23,12 +24,26 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
+    @GetMapping("/loginPage")
     public String loginPage(){
         return "user/login";
     }
 
-    @GetMapping("/signup")
+    @GetMapping("/login")
+    public String login(String userId, String password, HttpSession session){
+        userService.checkLogin(userId, password);
+        session.setAttribute("user",userId);
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("user");
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/signupPage")
     public String signUpPage(UserDTO userDTO){
         return "user/signup";
     }
@@ -43,7 +58,7 @@ public class AuthController {
         }
         userService.registerUser(userDTO);
 
-        return "redirect:/login";
+        return "redirect:/loginPage";
     }
 
 }

@@ -11,13 +11,10 @@ import javax.validation.constraints.Size;
 @Getter
 public class UserDTO {
 
-    @NotBlank(message = "입력해주세요")
     @Size(min = 6, max = 12, message = "6 ~ 12자리 입력해주세요")
     private String userId;
-    @NotBlank(message = "입력해주세요")
     @Size(min = 6, max = 12, message = "6 ~ 12자리 입력해주세요")
     private String password;
-    @NotBlank(message = "입력해주세요")
     @Size(min = 6, max = 12, message = "6 ~ 12자리 입력해주세요")
     private String password2;
 
