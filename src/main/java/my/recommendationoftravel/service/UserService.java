@@ -32,4 +32,13 @@ public class UserService {
             throw new AlertException(ErrorMessage.DUPLICATE_USERID);
         });
     }
+
+    public void checkLogin(String userId, String password) {
+        //존재 하지 않으면
+        Optional<User> user = userRepository.findByUserId(userId);
+        if (user.isEmpty() || !password.equals(user.get().getPassword())) {
+            throw new AlertException(ErrorMessage.NOT_AVAILABLE_LOGIN);
+        }
+
+    }
 }
