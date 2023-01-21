@@ -23,22 +23,22 @@
             <!-- ID input -->
             <div class="form-outline mb-4">
                 <input type="text" th:field="*{userId}" class="form-control" placeholder="6 ~ 12자리 입력해주세요"/>
-                <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="jb-red"></p>
                 <label class="form-label">ID</label>
+                <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="jb-red"></p>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
                 <input type="password" th:field="*{password}" class="form-control" placeholder="6 ~ 12자리 입력해주세요"/>
-                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="jb-red"></p>
                 <label class="form-label" >Password</label>
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="jb-red"></p>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
                 <input type="password" th:field="*{password2}" class="form-control" placeholder="6 ~ 12자리 입력해주세요"/>
-                <p th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}" class="jb-red"></p>
                 <label class="form-label">Confirm Password</label>
+                <p th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}" class="jb-red"></p>
             </div>
 
             <!-- Submit button -->
