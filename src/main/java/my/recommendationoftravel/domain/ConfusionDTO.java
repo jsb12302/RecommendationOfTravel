@@ -1,2 +1,7 @@
-package my.recommendationoftravel.domain;public class ReqeustConfuseDTO {
+package my.recommendationoftravel.domain;
+
+public class ConfusionDTO {
+
+    
+
 }

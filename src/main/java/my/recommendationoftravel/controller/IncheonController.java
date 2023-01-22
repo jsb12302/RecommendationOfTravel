@@ -5,6 +5,7 @@ import my.recommendationoftravel.domain.Country;
 import my.recommendationoftravel.domain.Parking;
 import my.recommendationoftravel.domain.RequestAviationDTO;
 import my.recommendationoftravel.service.AviationService;
+import my.recommendationoftravel.service.ConfusionService;
 import my.recommendationoftravel.service.ParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +23,13 @@ public class IncheonController {
 
     private final AviationService aviationService;
     private final ParkingService parkingService;
+    private final ConfusionService confusionService;
 
     @Autowired
-    public IncheonController(AviationService aviationService, ParkingService parkingService) {
+    public IncheonController(AviationService aviationService, ParkingService parkingService, ConfusionService confusionService) {
         this.aviationService = aviationService;
         this.parkingService = parkingService;
+        this.confusionService = confusionService;
     }
 
     @GetMapping("/getAviation")
@@ -49,6 +52,12 @@ public class IncheonController {
         model.addAttribute("parkingList",parkingList);
         model.addAttribute("standardTime",parkingService.getParkingTime());
         return "parking/parkingList";
+    }
+
+    @GetMapping("/confusion")
+    public String confusionPage(String terminal, String date, Model model) throws IOException, InterruptedException {
+        confusionService.requestConfusionApi(terminal, date);
+        return "confusion/confusion";
     }
 
 }
