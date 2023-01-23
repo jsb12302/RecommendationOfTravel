@@ -26,16 +26,16 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <select name="terminal" class="form-control">
-                                <option value="term1">제 1여객터미널</option>
-                                <option value="term2">제 2여객터미널</option>
+                                <option value="term1" th:selected="${terminal}=='term1'">제 1여객터미널</option>
+                                <option value="term2" th:selected="${terminal}=='term2'">제 2여객터미널</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                           <select name="date" class="form-control">
-                            <option value="0">오늘</option>
-                            <option value="1">내일</option>
+                            <option value="0" th:selected="${date}=='0'">오늘</option>
+                            <option value="1" th:selected="${date}=='1'">내일</option>
                           </select>
                         </div>
                     </div>
@@ -48,16 +48,17 @@
                       <button class="w-100 btn btn-primary btn-lg" type="submit">검색</button>
                     </div>
                   </div>
+                </div>
                 </form>
 
                   <table class="table table-striped">
                     <thead>
-                    <tr>
-                        <th scope="col" rowspan="2">시간
-                        <th scope="col" colspan="5" class="half">입국장</th>
-                        <th scope="col" colspan="5" class="half">출국장</th>
+                    <tr bgcolor="2B303E" style="border: white">
+                        <th scope="col" rowspan="2" style="color: white">시간
+                        <th scope="col" colspan="5" class="half" style="color: white">입국장</th>
+                        <th scope="col" colspan="5" class="half" style="color: white">출국장</th>
                     </tr>
-                    <tr>
+                    <tr bgcolor="#424858">
                         <th scope="col" class="sub-half">A,B</th>
                         <th scope="col" class="sub-half">C</th>
                         <th scope="col" class="sub-half">D</th>
@@ -71,7 +72,19 @@
                     </tr>
                     </thead>
                       <tbody>
-
+                          <tr th:each="confusion : ${confusionList}">
+                              <td th:text="${confusion.atime}"></td>
+                              <td th:text="${confusion.t1sum1}"></td>
+                              <td th:text="${confusion.t1sum3}"></td>
+                              <td th:text="${confusion.t1sum4}"></td>
+                              <td th:text="${confusion.t1sum2}"></td>
+                              <td th:text="${confusion.t1sumset1}"></td>
+                              <td th:text="${confusion.t1sum5}"></td>
+                              <td th:text="${confusion.t1sum6}"></td>
+                              <td th:text="${confusion.t1sum7}"></td>
+                              <td th:text="${confusion.t1sum8}"></td>
+                              <td th:text="${confusion.t1sumset2}"></td>
+                          </tr>
                       </tbody>
                   </table>
 
