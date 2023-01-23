@@ -1,6 +1,7 @@
 package my.recommendationoftravel.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import my.recommendationoftravel.domain.Confusion;
 import my.recommendationoftravel.domain.Country;
 import my.recommendationoftravel.domain.Parking;
 import my.recommendationoftravel.domain.RequestAviationDTO;
@@ -56,8 +57,16 @@ public class IncheonController {
 
     @GetMapping("/confusion")
     public String confusionPage(String terminal, String date, Model model) throws IOException, InterruptedException {
-        confusionService.requestConfusionApi(terminal, date);
-        return "confusion/confusion";
+        List<Confusion> confusions = confusionService.requestConfusionApi(terminal, date);
+        model.addAttribute("date",date);
+        model.addAttribute("terminal",terminal);
+        model.addAttribute("confusionList",confusions);
+        if(terminal.equals("term1")){
+            return "confusion/confusionTerm1";
+        }
+        else{
+            return "confusion/confusionTerm2";
+        }
     }
 
 }
