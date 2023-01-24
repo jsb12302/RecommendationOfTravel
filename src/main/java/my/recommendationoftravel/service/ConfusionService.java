@@ -31,7 +31,7 @@ public class ConfusionService {
 
         HttpResponse<String> httpResponse = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(httpResponse.body());
+//         System.out.println(httpResponse.body());
 
         JSONObject jsonObject = new JSONObject(httpResponse.body());
         JSONObject response = jsonObject.getJSONObject("response");
