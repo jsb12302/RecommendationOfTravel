@@ -1,5 +1,7 @@
 package my.recommendationoftravel.controller;
 
+import my.recommendationoftravel.domain.user.Role;
+import my.recommendationoftravel.domain.user.User;
 import my.recommendationoftravel.domain.user.UserDTO;
 import my.recommendationoftravel.service.UserService;
 import my.recommendationoftravel.util.AlertException;
@@ -31,8 +33,11 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login(String userId, String password, HttpSession session){
-        userService.checkLogin(userId, password);
-        session.setAttribute("user",userId);
+        User user = userService.checkLogin(userId, password);
+        session.setAttribute("user",user);
+        if(user.getRole().equals(Role.ADMIN)){
+            return "redirect:/admin";
+        }
         return "redirect:/";
     }
 

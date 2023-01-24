@@ -1,7 +1,7 @@
 package my.recommendationoftravel.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import my.recommendationoftravel.domain.Confusion;
+import my.recommendationoftravel.domain.confusion.Confusion;
 import my.recommendationoftravel.domain.Country;
 import my.recommendationoftravel.domain.Parking;
 import my.recommendationoftravel.domain.RequestAviationDTO;

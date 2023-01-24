@@ -33,12 +33,12 @@ public class UserService {
         });
     }
 
-    public void checkLogin(String userId, String password) {
+    public User checkLogin(String userId, String password) {
         //존재 하지 않으면
         Optional<User> user = userRepository.findByUserId(userId);
-        if (user.isEmpty() || !password.equals(user.get().getPassword())) {
+        if(user.isEmpty() || !password.equals(user.get().getPassword())) {
             throw new AlertException(ErrorMessage.NOT_AVAILABLE_LOGIN);
         }
-
+        return user.get();
     }
 }
