@@ -1,83 +1,150 @@
 <!DOCTYPE html>
 <html lang="en xmlns:th=http://www.thymeleaf.org">
 <th:block th:replace="~{layout:: setContent(~{this::content})}">
-  <th:block th:fragment="content">
-    <br>
-    <br>
-    <br>
-    <br>
+    <th:block th:fragment="content">
+        <br>
+        <br>
+        <br>
+        <br>
 
-    <main>
-      <div class="container">
-        <div>
-          <h2>출입국 별 공항 예상 혼잡도</h2>
-          <br>
-          <ul>
-            <li>
-              공항 예상 혼잡도 서비스는 시간대별 인천국제공항 이용 여객 수 정보를 제공하는 서비스로서, 해당 정보를 통해서 고객님의 공항 이용 시간대별 공항 혼잡상황을 미리
-              확인하실 수 있도록 하고 있습니다.
-            </li>
-          </ul>
-        </div>
+        <main>
+            <div class="container">
+                <div>
+                    <h2>출입국 별 공항 예상 혼잡도</h2>
+                    <br>
+                    <ul>
+                        <li>
+                            공항 예상 혼잡도 서비스는 시간대별 인천국제공항 이용 여객 수 정보를 제공하는 서비스로서, 해당 정보를 통해서 고객님의 공항 이용 시간대별 공항 혼잡상황을 미리
+                            확인하실 수 있도록 하고 있습니다.
+                        </li>
+                    </ul>
+                </div>
 
-        <form th:action="@{/confusion}" th:method="get">
-          <div class="row align-items-stretch mb-5">
-            <h2>공항 예상 혼잡도 조회</h2>
-            <div class="col-md-6">
-              <div class="form-group">
-                <select name="terminal" class="form-control">
-                  <option value="term1" th:selected="${terminal}=='term1'">제 1여객터미널</option>
-                  <option value="term2" th:selected="${terminal}=='term2'">제 2여객터미널</option>
-                </select>
-              </div>
+                <form th:action="@{/confusion}" th:method="get">
+                    <div class="row align-items-stretch mb-5">
+                        <h2>공항 예상 혼잡도 조회</h2>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select name="terminal" class="form-control">
+                                    <option value="term1" th:selected="${terminal}=='term1'">제 1여객터미널</option>
+                                    <option value="term2" th:selected="${terminal}=='term2'">제 2여객터미널</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select name="date" class="form-control">
+                                    <option value="0" th:selected="${date}=='0'">오늘</option>
+                                    <option value="1" th:selected="${date}=='1'">내일</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br><br><br>
+                        <div class="row">
+                            <div class="col">
+                                <button class="w-100 btn btn-primary btn-lg" type="submit">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col" rowspan="2">시간
+                        <th scope="col" colspan="3" class="half">입국장</th>
+                        <th scope="col" colspan="3" class="half">출국장</th>
+                    </tr>
+                    <tr>
+                        <th scope="col" class="sub-half" style="width:15%;">A</th>
+                        <th scope="col" class="sub-half" style="width:15%;">B</th>
+                        <th scope="col" class="sub-half" style="width:15%;">합계</th>
+                        <th scope="col" class="sub-half" style="width:15%;">1</th>
+                        <th scope="col" class="sub-half" style="width:15%;">2</th>
+                        <th scope="col" class="sub-half" style="width:15%;">합계</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="confusion : ${confusionList}">
+                        <td th:text="${confusion.atime}"></td>
+                        <td th:text="${#strings.substringBefore(confusion.t2sum1,'.')}"></td>
+                        <td th:text="${ #strings.substringBefore(confusion.t2sum2,'.')}"></td>
+                        <td th:text="${ #strings.substringBefore(confusion.t2sumset1,'.')}"></td>
+                        <td th:text="${ #strings.substringBefore(confusion.t2sum3,'.')}"></td>
+                        <td th:text="${ #strings.substringBefore(confusion.t2sum4,'.')}"></td>
+                        <td th:text="${ #strings.substringBefore(confusion.t2sumset2,'.')}"></td>
+                    </tr>
+                    </tbody>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                    <tr bgcolor="2B303E" style="border: white">
+                        <th scope="col" style="color: white">구분</th>
+                        <th scope="col" style="color: white">제1여객터미널(T1)</th>
+                        <th scope="col" style="color: white">제2여객터미널(T2)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <mark class="sticker blue">여유</mark>
+                        </td>
+                        <td class="center">시간당 7,000 ~ 7,600명</td>
+                        <td class="center">시간당 3,200 ~ 3,500명</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mark class="sticker yellow">보통</mark>
+                        </td>
+                        <td class="center">시간당 7,600 ~ 8,200명</td>
+                        <td class="center">시간당 3,500 ~ 3,800명</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mark class="sticker orange">혼잡</mark>
+                        </td>
+                        <td>
+                            시간당 8,200 ~ 8,600명
+                            <br>
+                            시간당 7,600명 초과 연속 2시간 지속 시
+                        </td>
+                        <td>
+                            시간당 3,800 ~ 4,000명
+                            <br>
+                            시간당 3,500명 초과 연속 2시간 지속 시
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mark class="sticker red">매우 혼잡</mark>
+                        </td>
+                        <td>
+                            시간당 8,600명
+                            ~
+                            <br>
+                            시간당 8,200명 초과 연속 2시간 지속 시
+                        </td>
+                        <td>
+                            시간당 4,000명
+                            ~
+                            <br>
+                            시간당 3,800명 초과 연속 2시간 지속 시
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <select name="date" class="form-control">
-                  <option value="0" th:selected="${date}=='0'">오늘</option>
-                  <option value="1" th:selected="${date}=='1'">내일</option>
-                </select>
-              </div>
             </div>
 
-            <br><br><br>
-            <div class="row">
-              <div class="col">
-                <!--                      <input type="hidden" name="terminal" value="term1">-->
-                <!--                      <input type="hidden" name="date" value="today">-->
-                <button class="w-100 btn btn-primary btn-lg" type="submit">검색</button>
-              </div>
-            </div>
-          </div>
-        </form>
+        </main>
 
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th scope="col" rowspan="2">시간
-            <th scope="col" colspan="3" class="half">입국장</th>
-            <th scope="col" colspan="3" class="half">출국장</th>
-          </tr>
-          <tr>
-            <th scope="col" class="sub-half" style="width:15%;">A</th>
-            <th scope="col" class="sub-half" style="width:15%;">B</th>
-            <th scope="col" class="sub-half" style="width:15%;">합계</th>
-            <th scope="col" class="sub-half" style="width:15%;">1</th>
-            <th scope="col" class="sub-half" style="width:15%;">2</th>
-            <th scope="col" class="sub-half" style="width:15%;">합계</th>
-          </tr>
-          </thead>
-          <tbody>
-
-          </tbody>
-        </table>
-
-      </div>
-      </div>
-
-    </main>
-
-  </th:block>
+    </th:block>
 </th:block>
 </html>
 
