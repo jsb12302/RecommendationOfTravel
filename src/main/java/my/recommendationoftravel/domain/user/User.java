@@ -2,10 +2,7 @@ package my.recommendationoftravel.domain.user;
 
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -18,10 +15,14 @@ public class User {
     private String userId;
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public User userDtoToEntity(UserDTO userDTO){
         User user = new User();
         user.userId = userDTO.getUserId();
         user.password = userDTO.getPassword();
+        user.role = Role.USER;
         return user;
     }
 }

@@ -1,4 +1,4 @@
-package my.recommendationoftravel.domain;
+package my.recommendationoftravel.domain.confusion;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

@@ -2,21 +2,12 @@ package my.recommendationoftravel.controller;
 
 
 import my.recommendationoftravel.domain.RequestAviationDTO;
+import my.recommendationoftravel.domain.user.Role;
 import my.recommendationoftravel.domain.user.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.net.URLEncoder;
 
 @Controller
 public class MainController {
@@ -30,4 +21,20 @@ public class MainController {
         return "aviation/aviation";
     }
 
+
+    @GetMapping("/admin")
+    public String adminPage(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if(user.getRole().equals(Role.ADMIN)){
+            return "admin/admin";
+        }
+        else{
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/board")
+    public String boardPage(){
+        return "/board/userBoard";
+    }
 }

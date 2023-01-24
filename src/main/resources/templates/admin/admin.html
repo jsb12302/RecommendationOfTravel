@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html lang="en xmlns:th=http://www.thymeleaf.org">
+<th:block th:replace="~{layout:: setContent(~{this::content})}">
+  <th:block th:fragment="content">
+    <main>
+      <section class="page-section" id="services">
+        <div class="container">
+
+        </div>
+      </section>
+    </main>
+  </th:block>
+</th:block>
 </html>

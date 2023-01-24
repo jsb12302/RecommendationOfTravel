@@ -1,7 +1,7 @@
 package my.recommendationoftravel.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import my.recommendationoftravel.domain.Confusion;
+import my.recommendationoftravel.domain.confusion.Confusion;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class ConfusionService {
 
         HttpResponse<String> httpResponse = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(httpResponse.body());
+//        System.out.println(httpResponse.body());
 
         JSONObject jsonObject = new JSONObject(httpResponse.body());
         JSONObject response = jsonObject.getJSONObject("response");
