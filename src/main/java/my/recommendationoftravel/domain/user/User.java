@@ -10,6 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USERS_ID")
     private Long id;
 
     private String userId;
