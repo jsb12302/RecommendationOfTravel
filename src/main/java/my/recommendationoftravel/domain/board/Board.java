@@ -1,5 +1,6 @@
 package my.recommendationoftravel.domain.board;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import my.recommendationoftravel.domain.user.User;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.TimeZone;
 
 @Entity
+@Getter
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Board {
