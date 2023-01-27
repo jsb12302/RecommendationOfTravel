@@ -5,9 +5,31 @@
     <main>
       <section class="page-section" id="services">
         <br>
-        <br><br><br><br><br><br><br><br>
         <div class="container-board">
-          hiii
+
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>제목</th>
+              <th>시간</th>
+              <th>관리</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="board : ${boardList}">
+              <td th:text="${board.title}"></td>
+              <td th:text="${board.createdDate}"></td>
+              <td>
+                <form th:action="@{/board}" th:method="delete">
+                    <input type="hidden" name="id" th:value="${board.id}">
+                  <button class="w-100 btn btn-primary" type="submit">삭제</button>
+                </form>
+<!--                  <a th:href="@{/board/{id}(id=${board.id})}"><button>삭제</button></a>-->
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
         </div>
       </section>
     </main>

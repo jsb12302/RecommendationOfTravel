@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -19,13 +21,20 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-    public void saveBoard(BoardDTO boardDTO, HttpSession httpSession){
-        User user = (User) httpSession.getAttribute("user");
+    public void saveBoard(BoardDTO boardDTO, User user){
         Board board = new Board(user,boardDTO.getTitle(), boardDTO.getContent());
         boardRepository.save(board);
-
     }
 
+    public List<Board> getBoardList(User user){
+        List<Board> allByUserId = boardRepository.findAllByUserId(user.getId());
+        return allByUserId;
+    }
+
+    public void removeBoard(Long id){
+        Optional<Board> board = boardRepository.findById(id);
+        board.ifPresent(boardRepository::delete);
+    }
 
 
 }
