@@ -1,5 +1,6 @@
 package my.recommendationoftravel.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import my.recommendationoftravel.domain.board.Board;
 import my.recommendationoftravel.domain.board.BoardDTO;
 import my.recommendationoftravel.domain.user.User;
@@ -8,13 +9,11 @@ import my.recommendationoftravel.util.SessionResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//@Slf4j
 @Controller
 public class BoardController {
 
@@ -43,5 +42,12 @@ public class BoardController {
     public String deleteBoard(@RequestParam Long id){
         boardService.removeBoard(id);
         return "redirect:/board";
+    }
+
+    @GetMapping("/board/{id}")
+    public String boardDetail(@SessionResolver User user, @PathVariable Long id, Model model){
+        Board board = boardService.getBoard(user, id);
+        model.addAttribute("board", board);
+        return "board/userBoardDetail";
     }
 }
