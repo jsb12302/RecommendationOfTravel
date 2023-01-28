@@ -1,5 +1,6 @@
 package my.recommendationoftravel.util;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -8,12 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class ExceptionResolve {
 
     @ExceptionHandler
-    public ModelAndView handlerAlertException(AlertException ex){
-        ModelAndView modelAndView = new ModelAndView();
+    public String handlerAlertException(AlertException ex, Model model){
         ErrorMessage errorMessage = ex.getErrorMessage();
-        modelAndView.addObject("data", new Message(errorMessage.getMessage(),errorMessage.getHref()));
-        modelAndView.setViewName("user/message");
-        return modelAndView;
+        model.addAttribute("data", new Message(errorMessage.getMessage(),errorMessage.getHref()));
+        return "user/message";
     }
 
 }

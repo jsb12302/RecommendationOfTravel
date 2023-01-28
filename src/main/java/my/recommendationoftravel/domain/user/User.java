@@ -1,9 +1,12 @@
 package my.recommendationoftravel.domain.user;
 
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Objects;
 
+@ToString
 @Entity
 @Getter
 public class User {
@@ -26,4 +29,13 @@ public class User {
         user.role = Role.USER;
         return user;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(userId, user.userId) && Objects.equals(password, user.password) && role == user.role;
+    }
+
 }
