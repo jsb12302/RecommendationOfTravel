@@ -89,15 +89,12 @@ public class AviationService {
     }
 
     public List<Country> returnOrder(List<Country> countries, String order){
-        Collections.sort(countries, new Comparator<Country>() {
-            @Override
-            public int compare(Country o1, Country o2) {
-                if(order.equals("ASC")){
-                    return o1.getArrFlight() - o2.getArrFlight();
-                }
-                else{
-                    return o2.getArrFlight() - o1.getArrFlight();
-                }
+        Collections.sort(countries, (o1, o2) -> {
+            if(order.equals("ASC")){
+                return o1.getArrFlight() - o2.getArrFlight();
+            }
+            else{
+                return o2.getArrFlight() - o1.getArrFlight();
             }
         });
         return countries;

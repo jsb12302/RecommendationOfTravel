@@ -9,7 +9,8 @@ public enum ErrorMessage{
     NOT_MATCH_PASSWORD("두 비밀번호가 일치하지 않습니다.","/signupPage"),
     DUPLICATE_USERID("회원 아이디가 중복 되었습니다.", "/signupPage"),
     NOT_AVAILABLE_LOGIN("로그인 정보가 올바르지 않습니다.","/loginPage"),
-    LOGIN_FIRST("로그인 먼저 해주세요.","/");
+    LOGIN_FIRST("로그인 먼저 해주세요.","/"),
+    NOT_FIND_BOARD("삭제된 게시물 입니다.","/board");
 
 
     private String message;

@@ -17,7 +17,11 @@
             </thead>
             <tbody>
             <tr th:each="board : ${boardList}">
-              <td th:text="${board.title}"></td>
+              <td>
+                <a th:href="@{/board/{id}(id=${board.id})}">[[${board.title}]]</a>
+              </td>
+
+<!--              <td th:href="@{/board/{id}(id=${board.id})}">[[${board.title}]]</td>-->
               <td th:text="${board.createdDate}"></td>
               <td>
                 <form th:action="@{/board}" th:method="delete">

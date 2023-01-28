@@ -15,16 +15,15 @@ import javax.servlet.http.HttpSession;
 @Component
 public class HttpSessionArgumentResolver implements HandlerMethodArgumentResolver {
 
-    private final HttpSession httpSession;
-
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterAnnotation(SessionResolver.class) != null;
+        return parameter.hasParameterAnnotation(SessionResolver.class);
     }
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-       return httpSession.getAttribute("user");
+        HttpSession session = webRequest.getNativeRequest(HttpServletRequest.class).getSession();
+        return session.getAttribute("user");
     }
 }
