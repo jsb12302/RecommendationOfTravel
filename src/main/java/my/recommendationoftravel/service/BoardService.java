@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -45,5 +46,25 @@ public class BoardService {
         } else {
             throw new AlertException(ErrorMessage.NOT_FIND_BOARD);
         }
+    }
+
+    public Board adminGetBoard(Long boardId){
+        Optional<Board> board = boardRepository.findById(boardId);
+        return board.orElseThrow(
+                () ->  new AlertException(ErrorMessage.NOT_FIND_BOARD)
+        );
+    }
+
+    public List<Board> getAllBoards(){
+        return boardRepository.findAll();
+    }
+
+    @Transactional
+    public void postAnswer(String answer, Long boardId){
+        Optional<Board> boards = boardRepository.findById(boardId);
+        boards.ifPresentOrElse(
+                board -> board.setAnswer(answer),
+                () -> {throw new AlertException(ErrorMessage.NOT_FIND_BOARD);}
+        );
     }
 }
