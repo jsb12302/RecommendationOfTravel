@@ -39,7 +39,7 @@ public class MainController {
     public String boardPage(HttpSession session){
         User user = (User) session.getAttribute("user");
         if(user != null){
-            return "/board/userPosting";
+            return "board/userPosting";
         }
         else{
             throw new AlertException(ErrorMessage.LOGIN_FIRST);

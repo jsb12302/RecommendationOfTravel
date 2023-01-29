@@ -59,7 +59,7 @@ public class BoardController {
     @GetMapping("admin/boards")
     public String adminBoards(@SessionResolver User user, Model model){
         model.addAttribute("boards",boardService.getAllBoards());
-        return "/admin/adminBoard";
+        return "admin/adminBoard";
     }
 
     @GetMapping("/admin/boards/{id}")
