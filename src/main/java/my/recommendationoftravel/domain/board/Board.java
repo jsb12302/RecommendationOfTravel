@@ -2,6 +2,7 @@ package my.recommendationoftravel.domain.board;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import my.recommendationoftravel.domain.user.User;
 import org.springframework.data.annotation.CreatedDate;
@@ -32,6 +33,9 @@ public class Board {
     @Lob
     private String content;
 
+    @Lob
+    private String answer;
+
     @CreatedDate
     private LocalDateTime createdDate;
 
@@ -44,5 +48,9 @@ public class Board {
         this.user = user;
         this.title = title;
         this.content = content;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }

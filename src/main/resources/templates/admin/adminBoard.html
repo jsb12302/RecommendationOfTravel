@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en xmlns:th=http://www.thymeleaf.org">
+<th:block th:replace="~{no_title_layout:: setContent(~{this::content})}">
+  <th:block th:fragment="content">
+    <main>
+      <section class="page-section" id="services">
+        <br>
+        <div class="container-board">
+
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>제목</th>
+              <th>시간</th>
+              <th>관리</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="board : ${boards}">
+              <td>
+                <a th:href="@{/admin/boards/{id}(id=${board.id})}">[[${board.title}]]</a>
+              </td>
+              <td th:text="${board.createdDate}"></td>
+              <td>
+                <form th:action="@{/admin/boards}" th:method="delete">
+                  <input type="hidden" name="id" th:value="${board.id}">
+                  <button class="w-100 btn btn-primary" type="submit">삭제</button>
+                </form>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </section>
+    </main>
+  </th:block>
+</th:block>
+</html>

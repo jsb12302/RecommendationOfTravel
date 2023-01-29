@@ -23,7 +23,12 @@
 
           <br>
           <hr>
-
+          <form action="/admin/boards" method="post">
+            답변 : <textarea type="text" name="answer" th:field="${board.answer}" class="form-control" required></textarea>
+            <input type="hidden" name="boardId" th:value="${board.id}">
+            <br>
+            <button class="w-100 btn btn-primary btn-lg" type="submit">전송</button>
+          </form>
         </div>
       </section>
     </main>
