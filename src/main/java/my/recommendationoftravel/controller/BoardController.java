@@ -27,7 +27,7 @@ public class BoardController {
     public String postBoard(BoardDTO boardDTO, @SessionResolver User user){
         System.out.println(user.getUserId());
         boardService.saveBoard(boardDTO, user);
-        return "redirect:/board";
+        return "redirect:/boards";
     }
 
     @GetMapping("/boards")
@@ -40,7 +40,7 @@ public class BoardController {
     @DeleteMapping("/boards")
     public String deleteBoard(@RequestParam Long id){
         boardService.removeBoard(id);
-        return "redirect:/board";
+        return "redirect:/boards";
     }
 
     @GetMapping("/boards/{id}")
