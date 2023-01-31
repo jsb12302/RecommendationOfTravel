@@ -18,9 +18,8 @@
           </h4>
           <br>
           <h6>
-            작성시간 : [[${board.createdDate}]]
+            작성시간 :<span th:text="${#strings.substringBefore(board.createdDate,'.')}"></span>
           </h6>
-
           <br>
           <hr>
           <h2>
