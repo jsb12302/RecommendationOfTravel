@@ -20,7 +20,7 @@
               <td>
                 <a th:href="@{/admin/boards/{id}(id=${board.id})}">[[${board.title}]]</a>
               </td>
-              <td th:text="${board.createdDate}"></td>
+              <td th:text="${#strings.substringBefore(board.createdDate,'.')}"></td>
               <td>
                 <form th:action="@{/admin/boards}" th:method="delete">
                   <input type="hidden" name="id" th:value="${board.id}">
