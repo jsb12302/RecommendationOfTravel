@@ -10,7 +10,8 @@ public enum ErrorMessage{
     DUPLICATE_USERID("회원 아이디가 중복 되었습니다.", "/signupPage"),
     NOT_AVAILABLE_LOGIN("로그인 정보가 올바르지 않습니다.","/loginPage"),
     LOGIN_FIRST("로그인 먼저 해주세요.","/"),
-    NOT_FIND_BOARD("삭제된 게시물 입니다.","/board");
+    NOT_FIND_BOARD("삭제된 게시물 입니다.","/board"),
+    NOT_VALID_SESSION("세션 정보가 없습니다.","/");
 
 
     private String message;

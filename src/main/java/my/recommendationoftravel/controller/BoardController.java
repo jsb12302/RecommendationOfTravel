@@ -4,6 +4,7 @@ import my.recommendationoftravel.domain.board.Board;
 import my.recommendationoftravel.domain.board.BoardDTO;
 import my.recommendationoftravel.domain.user.User;
 import my.recommendationoftravel.service.BoardService;
+import my.recommendationoftravel.util.CheckSession;
 import my.recommendationoftravel.util.SessionResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class BoardController {
         return "redirect:/boards";
     }
 
+    @CheckSession
     @GetMapping("/boards")
     public String getBoardList(@SessionResolver User user, Model model){
         List<Board> boardList = boardService.getBoardList(user);
@@ -43,6 +45,7 @@ public class BoardController {
         return "redirect:/boards";
     }
 
+    @CheckSession
     @GetMapping("/boards/{id}")
     public String boardDetail(@SessionResolver User user, @PathVariable Long id, Model model){
         Board board = boardService.getBoard(user, id);
@@ -56,12 +59,14 @@ public class BoardController {
         return "redirect:/admin/boards";
     }
 
+    @CheckSession
     @GetMapping("admin/boards")
     public String adminBoards(@SessionResolver User user, Model model){
         model.addAttribute("boards",boardService.getAllBoards());
         return "admin/adminBoard";
     }
 
+    @CheckSession
     @GetMapping("/admin/boards/{id}")
     public String adminBoardDetail(@PathVariable Long id, Model model){
         Board board = boardService.adminGetBoard(id);
