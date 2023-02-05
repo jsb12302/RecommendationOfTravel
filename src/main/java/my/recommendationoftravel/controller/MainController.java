@@ -5,6 +5,7 @@ import my.recommendationoftravel.domain.RequestAviationDTO;
 import my.recommendationoftravel.domain.user.Role;
 import my.recommendationoftravel.domain.user.User;
 import my.recommendationoftravel.util.AlertException;
+import my.recommendationoftravel.util.CheckSession;
 import my.recommendationoftravel.util.ErrorMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,7 @@ public class MainController {
         }
     }
 
+    @CheckSession
     @GetMapping("/boardForm")
     public String boardPage(HttpSession session){
         User user = (User) session.getAttribute("user");
