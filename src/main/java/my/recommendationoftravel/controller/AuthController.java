@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.net.http.HttpRequest;
+import java.security.NoSuchAlgorithmException;
 
 @Controller
 public class AuthController {
@@ -32,7 +33,7 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String login(String userId, String password, HttpSession session){
+    public String login(String userId, String password, HttpSession session) throws NoSuchAlgorithmException {
         User user = userService.checkLogin(userId, password);
         session.setAttribute("user",user);
         if(user.getRole().equals(Role.ADMIN)){
@@ -54,7 +55,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public String signUp(@Valid UserDTO userDTO, BindingResult bindingResult, Model model){
+    public String signUp(@Valid UserDTO userDTO, BindingResult bindingResult, Model model) throws NoSuchAlgorithmException {
         if(bindingResult.hasErrors()){
             return "user/signup";
         }
