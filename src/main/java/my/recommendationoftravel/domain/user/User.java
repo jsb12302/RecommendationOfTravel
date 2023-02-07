@@ -19,15 +19,24 @@ public class User {
     private String userId;
     private String password;
 
+    private String salt;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
     public User userDtoToEntity(UserDTO userDTO){
         User user = new User();
         user.userId = userDTO.getUserId();
-        user.password = userDTO.getPassword();
         user.role = Role.USER;
         return user;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     @Override
